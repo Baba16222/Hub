@@ -52,8 +52,8 @@ end
 -- Function to play random sound effects
 local function playRandomSoundEffect()
     local soundEffects = {
-        "rbxassetid://6261793745",  -- Add more sound IDs as needed
-        "rbxassetid://6261793951",
+        "rbxassetid://156721873",  -- Add more sound IDs as needed
+        "rbxassetid:///6955233353",
         "rbxassetid://6261794063"
     }
 
