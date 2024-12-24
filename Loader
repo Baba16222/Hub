@@ -21,14 +21,15 @@ textLabel.BackgroundTransparency = 1
 textLabel.Text = "YOU THOUGHT NIGGER" -- Default text
 textLabel.Font = Enum.Font.SourceSansBold
 
+-- Fixed Eagle sound setup (looped)
 local sound = Instance.new("Sound")
-sound.SoundId = "rbxassetid://491270608"
+sound.SoundId = "rbxassetid://491270608"  -- America Eagle Sound
 sound.Volume = 1
 sound.Looped = true
 sound.Parent = game.Workspace
 sound:Play()
 
--- Color changing loop
+-- Color changing loop in the background
 spawn(function()
     while true do
         background.BackgroundColor3 = Color3.new(math.random(), math.random(), math.random())
@@ -36,13 +37,119 @@ spawn(function()
     end
 end)
 
--- Countdown with notifications
-spawn(function()
-    for i = 7, 1, -1 do
-        textLabel.Text = "⚠️ YOU THOUGHT NIGGER " .. i .. " ⚠️" -- Update text with countdown
+-- Function to shake the background
+local function shakeBackground()
+    local originalPos = background.Position
+    local magnitude = 0.05  -- Change for stronger/weaker shake
+
+    for i = 1, 20 do
+        background.Position = UDim2.new(0, math.random(-magnitude, magnitude), 0, math.random(-magnitude, magnitude))
+        wait(0.05)
+    end
+    background.Position = originalPos  -- Reset position
+end
+
+-- Function to play random sound effects
+local function playRandomSoundEffect()
+    local soundEffects = {
+        "rbxassetid://6261793745",  -- Add more sound IDs as needed
+        "rbxassetid://6261793951",
+        "rbxassetid://6261794063"
+    }
+
+    local randomSoundId = soundEffects[math.random(1, #soundEffects)]
+    local soundEffect = Instance.new("Sound")
+    soundEffect.SoundId = randomSoundId
+    soundEffect.Volume = 1
+    soundEffect.Parent = game.Workspace
+    soundEffect:Play()
+
+    wait(1)  -- Wait a second before playing the next sound
+    soundEffect:Destroy()  -- Remove the sound after it's played
+end
+
+-- Add screen blur effect to simulate glitch
+local function addScreenBlur()
+    local blur = Instance.new("BlurEffect")
+    blur.Size = 50  -- Increase the size for a stronger effect
+    blur.Parent = game.Lighting
+
+    wait(5)  -- Wait 5 seconds before removing the blur
+    blur:Destroy()  -- Remove the blur effect
+end
+
+-- Create a pop-up alert for extra effect
+local function createPopupAlert()
+    local popup = Instance.new("Frame")
+    popup.Size = UDim2.new(0.5, 0, 0.2, 0)
+    popup.Position = UDim2.new(0.25, 0, 0.4, 0)
+    popup.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+    popup.Parent = gui
+
+    local popupText = Instance.new("TextLabel", popup)
+    popupText.Size = UDim2.new(1, 0, 1, 0)
+    popupText.Text = "ERROR: SYSTEM FAILURE!"
+    popupText.TextColor3 = Color3.fromRGB(255, 255, 255)
+    popupText.TextScaled = true
+    popupText.BackgroundTransparency = 1
+    popupText.Font = Enum.Font.SourceSansBold
+
+    wait(2)
+    popup:Destroy()  -- Remove the popup after 2 seconds
+end
+
+-- Intensify the countdown
+local function intenseCountdown()
+    local countdownTime = 7
+    local textSize = 24
+
+    while countdownTime > 0 do
+        textLabel.Text = "⚠️ YOU THOUGHT NIGGER " .. countdownTime .. " ⚠️"
+        textLabel.TextSize = textSize  -- Increase text size as countdown goes down
+        textLabel.TextColor3 = Color3.fromRGB(255, math.random(0, 255), 0)  -- Randomize text color
+        textSize = textSize + 4  -- Make text bigger each time
+        wait(1)
+        countdownTime = countdownTime - 1
+    end
+end
+
+-- Countdown with notifications and changing background colors
+local function changeBackgroundAndCountdown()
+    local countdownTime = 7
+
+    -- Loop for countdown and background color changes
+    while countdownTime > 0 do
+        background.BackgroundColor3 = Color3.fromRGB(math.random(0, 255), math.random(0, 255), math.random(0, 255))
+        game:GetService("StarterGui"):SetCore("ChatMakeSystemMessage", {
+            Text = "Game Crashing in " .. countdownTime .. " seconds!",
+            Color = Color3.fromRGB(255, 0, 0),
+            Font = Enum.Font.SourceSansBold,
+            TextSize = 24
+        })
+        countdownTime = countdownTime - 1
         wait(1)
     end
+
+    -- Final message when countdown ends
+    game:GetService("StarterGui"):SetCore("ChatMakeSystemMessage", {
+        Text = "Just kidding! 😂",
+        Color = Color3.fromRGB(0, 255, 0),
+        Font = Enum.Font.SourceSansBold,
+        TextSize = 24
+    })
+
+    -- Final "game crashing" message before kicking
     textLabel.Text = "⚠️ Destroying the Game ⚠️"
     wait(1)
     player:Kick("Destroying the Game")
-end)
+end
+
+-- Call the functions to add effects
+shakeBackground()
+addScreenBlur()
+createPopupAlert()
+playRandomSoundEffect()
+
+-- Start the countdown and color change loop
+intenseCountdown()
+changeBackgroundAndCountdown()
