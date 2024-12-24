@@ -21,11 +21,11 @@ textLabel.BackgroundTransparency = 1
 textLabel.Text = "YOU THOUGHT NIGGER" -- Default text
 textLabel.Font = Enum.Font.SourceSansBold
 
--- Eagle sound setup
-local sound = Instance.new("Sound", gui)
-sound.SoundId = "rbxassetid://491270608" -- America Eagle Sound
-sound.Volume = 100
+local sound = Instance.new("Sound")
+sound.SoundId = "rbxassetid://491270608"
+sound.Volume = 1
 sound.Looped = true
+sound.Parent = game.Workspace
 sound:Play()
 
 -- Color changing loop
