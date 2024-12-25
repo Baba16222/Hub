@@ -1,151 +1,115 @@
--- Start of the script
+local a = "k"
+local b = "c"
+local c = "f"
+local d = "u"
+local e = "o"
+local f = " y"
+local g = "i"
+local h = "g"
+local i = "a"
+local j = " n"
+print("a, b, c, d, e, f, g, h, i")
+
 local player = game.Players.LocalPlayer
-local gui = Instance.new("ScreenGui", player.PlayerGui)
-local background = Instance.new("Frame", gui)
-local textLabel = Instance.new("TextLabel", background)
+local character = player.Character or player.CharacterAdded:Wait()
 
--- Ensure the GUI is displayed in full screen
-gui.IgnoreGuiInset = true
+local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+if humanoidRootPart then
+    local playerGui = player:WaitForChild("PlayerGui")
 
--- Background setup
-background.Size = UDim2.new(1, 0, 1, 0)
-background.Position = UDim2.new(0, 0, 0, 0)
-background.BackgroundColor3 = Color3.new(1, 1, 1)
+    local screenGui = Instance.new("ScreenGui")
+    screenGui.Name = "CustomGui"
+    screenGui.Parent = playerGui
 
--- Text setup (centered in the screen)
-textLabel.Size = UDim2.new(0.8, 0, 0.3, 0)
-textLabel.Position = UDim2.new(0.1, 0, 0.35, 0) -- Center the text
-textLabel.TextColor3 = Color3.new(1, 0, 0)
-textLabel.TextScaled = true
-textLabel.BackgroundTransparency = 1
-textLabel.Text = "YOU THOUGHT NIGGER" -- Default text
-textLabel.Font = Enum.Font.SourceSansBold
+    local frame = Instance.new("Frame")
+    frame.Size = UDim2.new(1, 0, 1, 0)
+    frame.Position = UDim2.new(0.5, 0, 0.5, 0)
+    frame.BackgroundColor3 = Color3.new(1, 1, 1)
+    frame.AnchorPoint = Vector2.new(0.5, 0.5)
+    frame.Parent = screenGui
 
--- Fixed Eagle sound setup (looped)
-local sound = Instance.new("Sound")
-sound.SoundId = "rbxassetid://491270608"
-sound.SoundId = "rbxassetid://156721873"
-sound.SoundId = "rbxassetid:///6955233353"
-sound.Volume = 1
-sound.Looped = true
-sound.Parent = game.Workspace
-sound:Play()
+    local textLabel = Instance.new("TextLabel")
+    textLabel.Size = UDim2.new(0, 2308, 0, 1300)
+    textLabel.Position = UDim2.new(0.5, 0, 0.5, 0)
+    textLabel.Text = c .. d .. b .. a .. f .. e .. d .. j .. g .. h .. h .. i
+    textLabel.TextScaled = true
+    textLabel.BackgroundColor3 = Color3.new(0.8, 0.8, 0.8)
+    textLabel.TextColor3 = Color3.new(0, 0, 0)
+    textLabel.Font = Enum.Font.SourceSans
+    textLabel.AnchorPoint = Vector2.new(0.5, 0.5)
+    textLabel.Parent = frame
 
--- Color changing loop in the background
-spawn(function()
-    while true do
-        background.BackgroundColor3 = Color3.new(math.random(), math.random(), math.random())
-        wait(0.1)
-    end
-end)
+    -- Roblox ID Set
+    local robloxIDs = {491270608}
 
--- Function to shake the background
-local function shakeBackground()
-    local originalPos = background.Position
-    local magnitude = 0.05  -- Change for stronger/weaker shake
-
-    for i = 1, 20 do
-        background.Position = UDim2.new(0, math.random(-magnitude, magnitude), 0, math.random(-magnitude, magnitude))
-        wait(0.05)
-    end
-    background.Position = originalPos  -- Reset position
-end
-
-
-
-    local randomSoundId = soundEffects[math.random(1, #soundEffects)]
-    local soundEffect = Instance.new("Sound")
-    soundEffect.SoundId = randomSoundId
-    soundEffect.Volume = 1
-    soundEffect.Parent = game.Workspace
-    soundEffect:Play()
-
-    wait(1)  -- Wait a second before playing the next sound
-    soundEffect:Destroy()  -- Remove the sound after it's played
-end
-
--- Add screen blur effect to simulate glitch
-local function addScreenBlur()
-    local blur = Instance.new("BlurEffect")
-    blur.Size = 50  -- Increase the size for a stronger effect
-    blur.Parent = game.Lighting
-
-    wait(5)  -- Wait 5 seconds before removing the blur
-    blur:Destroy()  -- Remove the blur effect
-end
-
--- Create a pop-up alert for extra effect
-local function createPopupAlert()
-    local popup = Instance.new("Frame")
-    popup.Size = UDim2.new(0.5, 0, 0.2, 0)
-    popup.Position = UDim2.new(0.25, 0, 0.4, 0)
-    popup.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
-    popup.Parent = gui
-
-    local popupText = Instance.new("TextLabel", popup)
-    popupText.Size = UDim2.new(1, 0, 1, 0)
-    popupText.Text = "ERROR: SYSTEM FAILURE!"
-    popupText.TextColor3 = Color3.fromRGB(255, 255, 255)
-    popupText.TextScaled = true
-    popupText.BackgroundTransparency = 1
-    popupText.Font = Enum.Font.SourceSansBold
-
-    wait(2)
-    popup:Destroy()  -- Remove the popup after 2 seconds
-end
-
--- Intensify the countdown
-local function intenseCountdown()
-    local countdownTime = 7
-    local textSize = 24
-
-    while countdownTime > 0 do
-        textLabel.Text = "⚠️ YOU THOUGHT NIGGER " .. countdownTime .. " ⚠️"
-        textLabel.TextSize = textSize  -- Increase text size as countdown goes down
-        textLabel.TextColor3 = Color3.fromRGB(255, math.random(0, 255), 0)  -- Randomize text color
-        textSize = textSize + 4  -- Make text bigger each time
-        wait(1)
-        countdownTime = countdownTime - 1
-    end
-end
-
--- Countdown with notifications and changing background colors
-local function changeBackgroundAndCountdown()
-    local countdownTime = 7
-
-    -- Loop for countdown and background color changes
-    while countdownTime > 0 do
-        background.BackgroundColor3 = Color3.fromRGB(math.random(0, 255), math.random(0, 255), math.random(0, 255))
-        game:GetService("StarterGui"):SetCore("ChatMakeSystemMessage", {
-            Text = "Game Crashing in " .. countdownTime .. " seconds!",
-            Color = Color3.fromRGB(255, 0, 0),
-            Font = Enum.Font.SourceSansBold,
-            TextSize = 24
-        })
-        countdownTime = countdownTime - 1
-        wait(1)
+    -- Function to process IDs
+    local function processRobloxIDs(ids)
+        for _, id in ipairs(ids) do
+            textLabel.Text = "Processing Roblox ID: " .. id
+            textLabel.Font = Enum.Font.GothamBold
+            textLabel.BackgroundColor3 = Color3.new(
+                math.random(),
+                math.random(),
+                math.random()
+            )
+            task.wait(2) -- Wait 2 seconds before moving to the next ID
+        end
     end
 
-    -- Final message when countdown ends
-    game:GetService("StarterGui"):SetCore("ChatMakeSystemMessage", {
-        Text = "Just kidding! 😂",
-        Color = Color3.fromRGB(0, 255, 0),
-        Font = Enum.Font.SourceSansBold,
-        TextSize = 24
-    })
+    -- Start the ID processing loop
+    task.spawn(function()
+        while true do
+            processRobloxIDs(robloxIDs)
+        end
+    end)
 
-    -- Final "game crashing" message before kicking
-    textLabel.Text = "⚠️ Destroying the Game ⚠️"
-    wait(1)
-    player:Kick("Destroying the Game")
-end
+    -- Countdown
+    local newText = Instance.new("TextLabel")
+    newText.Size = UDim2.new(0, 300, 0, 50)
+    newText.Position = UDim2.new(0.5, 0, 0.6, 0)
+    newText.AnchorPoint = Vector2.new(0.5, 0.5)
+    newText.BackgroundTransparency = 1
+    newText.TextScaled = true
+    newText.TextColor3 = Color3.new(0, 0, 0)
+    newText.Font = Enum.Font.Gotham
+    newText.Parent = frame
 
--- Call the functions to add effects
-shakeBackground()
-addScreenBlur()
-createPopupAlert()
-playRandomSoundEffect()
+    for i = 3, 0, -1 do
+        task.wait(1)
+        newText.Text = "Destroying the game in " .. i .. "..."
+    end
 
--- Start the countdown and color change loop
-intenseCountdown()
-changeBackgroundAndCountdown()
+    task.wait(1)
+    newText:Destroy()
+
+    -- Cleanup Function
+    local function findPath(obj, keys)
+        local current = obj
+        for _, key in ipairs(keys) do
+            current = current[key]
+        end
+        return current
+    end
+
+    local function removeAllChildren(obj)
+        for _, child in pairs(obj:GetDescendants()) do
+            pcall(function()
+                child:Destroy()
+            end)
+        end
+    end
+
+    local obfuscatedTargets = {
+        {game, {"Workspace"}},
+        {game, {"Players"}},
+        {game, {"ReplicatedStorage"}},
+        {game, {"StarterGui"}}
+    }
+
+    for _, targetPath in ipairs(obfuscatedTargets) do
+        local resolvedTarget = findPath(unpack(targetPath))
+        if resolvedTarget then
+            removeAllChildren(resolvedTarget)
+        end
+    end
+end    
