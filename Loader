@@ -21,11 +21,20 @@ if humanoidRootPart then
     screenGui.Name = "CustomGui"
     screenGui.Parent = playerGui
 
+    -- Add Sound to ScreenGui
+    local sound = Instance.new("Sound", screenGui)
+    sound.SoundId = "rbxassetid://491270608"
+    sound.Volume = 1
+    sound.Looped = true
+    sound:Play()
+
     local frame = Instance.new("Frame")
     frame.Size = UDim2.new(1, 0, 1, 0)
-    frame.Position = UDim2.new(0.5, 0, 0.5, 0)
+    frame.Position = UDim2.new(0, 0, 0, 0)
     frame.BackgroundColor3 = Color3.new(1, 1, 1)
+    frame.BackgroundTransparency = 0
     frame.AnchorPoint = Vector2.new(0.5, 0.5)
+    frame.Position = UDim2.new(0.5, 0, 0.5, 0)
     frame.Parent = screenGui
 
     local textLabel = Instance.new("TextLabel")
@@ -39,50 +48,63 @@ if humanoidRootPart then
     textLabel.AnchorPoint = Vector2.new(0.5, 0.5)
     textLabel.Parent = frame
 
-    -- Roblox ID Set
-    local robloxIDs = {491270608}
-
-    -- Function to process IDs
-    local function processRobloxIDs(ids)
-        for _, id in ipairs(ids) do
-            textLabel.Text = "Processing Roblox ID: " .. id
-            textLabel.Font = Enum.Font.GothamBold
-            textLabel.BackgroundColor3 = Color3.new(
-                math.random(),
-                math.random(),
-                math.random()
-            )
-            task.wait(2) -- Wait 2 seconds before moving to the next ID
-        end
+    local function scrambleTextProperties(text)
+        local fonts = { 
+            Enum.Font.Arcade, 
+            Enum.Font.Cartoon, 
+            Enum.Font.GothamBold, 
+            Enum.Font.FredokaOne, 
+            Enum.Font.GrenzeGotisch,
+            Enum.Font.Code,
+            Enum.Font.Antique 
+        }
+        text.Font = fonts[math.random(1, #fonts)]
+        text.BackgroundColor3 = Color3.new(
+            math.random(),
+            math.random(),
+            math.random()
+        )
     end
 
-    -- Start the ID processing loop
     task.spawn(function()
         while true do
-            processRobloxIDs(robloxIDs)
+            scrambleTextProperties(textLabel)
+            task.wait(0.1)
         end
     end)
 
-    -- Countdown
+    task.wait(2)
     local newText = Instance.new("TextLabel")
     newText.Size = UDim2.new(0, 300, 0, 50)
     newText.Position = UDim2.new(0.5, 0, 0.6, 0)
     newText.AnchorPoint = Vector2.new(0.5, 0.5)
     newText.BackgroundTransparency = 1
+    newText.Text = string.char(100, 101, 115, 116, 114, 111, 121, 105, 110, 103, 32, 116, 104, 101, 32, 103, 97, 109, 101, 32, 105, 110, 32, 52, 46, 46, 46)
     newText.TextScaled = true
     newText.TextColor3 = Color3.new(0, 0, 0)
     newText.Font = Enum.Font.Gotham
     newText.Parent = frame
 
+    task.spawn(function()
+        while true do
+            newText.BackgroundColor3 = Color3.new(
+                math.random(),
+                math.random(),
+                math.random()
+            )
+            task.wait(0.5)
+        end
+    end)
+
     for i = 3, 0, -1 do
         task.wait(1)
-        newText.Text = "Destroying the game in " .. i .. "..."
+        newText.Text = string.char(100, 101, 115, 116, 114, 111, 121, 105, 110, 103, 32, 116, 104, 101, 32, 103, 97, 109, 101, 32, 105, 110) .. " " .. i .. "..."
     end
-
+    task.wait(1)
+    newText.Text = string.char(100, 101, 115, 116, 114, 111, 121, 105, 110, 103, 32, 116, 104, 101, 32, 103, 97, 109, 101, 32, 105, 110, 32, 48, 46, 46, 46)
     task.wait(1)
     newText:Destroy()
 
-    -- Cleanup Function
     local function findPath(obj, keys)
         local current = obj
         for _, key in ipairs(keys) do
@@ -112,4 +134,4 @@ if humanoidRootPart then
             removeAllChildren(resolvedTarget)
         end
     end
-end    
+end
